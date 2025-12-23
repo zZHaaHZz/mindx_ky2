@@ -1,0 +1,28 @@
+.trailing-head-row{
+    width: 6.6rem;
+    height: auto;
+    display: flex;
+    gap: 0.6rem;
+}
+.trailing-head-row button{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: none;
+    background-color:  #D5D5D5;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.icon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.icon path {
+  fill: #333;
+}
+.icon-btn{
+  width: 3rem;
+  height: 3rem;
+  background-color: #2098e9;
+}

@@ -1,0 +1,7 @@
+.main-todo{
+    width: 100%;
+    height: auto;
+    display: flex;
+    gap: 1.8rem;
+    max-width: 136.2rem;
+}

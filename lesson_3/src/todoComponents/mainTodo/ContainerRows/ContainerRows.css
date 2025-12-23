@@ -1,0 +1,12 @@
+.container-rows{
+    width: 100%;
+    max-width: 31.8rem;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #E6ECF0;
+    border-radius: 0.5rem .5rem 0 0;
+    gap: 0.3rem;
+    box-sizing: border-box;
+    padding: 0 0 2rem 0;
+}

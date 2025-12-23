@@ -1,0 +1,8 @@
+.row-head{
+    width: auto;
+    height: 5.6rem;
+    display: flex;
+    padding: 0 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
