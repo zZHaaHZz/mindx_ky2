@@ -1,69 +1,56 @@
-import { useState } from "react"
-import Button from "../UserInfoForm/Button.jsx"
+import { useState } from "react";
+import Task from "./Task";
 
 const TodoList = () => {
-    const localJob = JSON.parse(localStorage.getItem("job"))
-    const [job, setJob] = useState("")
-    const [jobs, setJobs] = useState(localJob ?? [])
-    const [editIndex, setEditIndex] = useState(null)
+    const [tasks, setTasks] = useState(() => {
+        const saved = localStorage.getItem("tasks");
+        return saved ? JSON.parse(saved) : [];
+    });
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        if (!job.trim()) return
+    const [text, setText] = useState("");
 
-        setJobs(prev => {
-            let newJobs
-            if(editIndex !== null) {
-                newJobs = [...prev]
-                newJobs[editIndex] = job  
-                setEditIndex(null)
-            } 
-            else {
-                // add
-                newJobs = [...prev, job]
-            }
+    const saveTasks = (newTasks) => {
+        setTasks(newTasks);
+        localStorage.setItem("tasks", JSON.stringify(newTasks));
+    };
 
-            localStorage.setItem("job", JSON.stringify(newJobs))
-            return newJobs
-        })
+    const addTask = () => {
+        if (!text.trim()) return;
+        saveTasks([...tasks, { id: Date.now(), text }]);
+        setText("");
+    };
 
-        setJob("")
-    }
+    const deleteTask = (id) => {
+        saveTasks(tasks.filter(t => t.id !== id));
+    };
 
-    const handleDelete = (value) => {
-        setJobs(prev => {
-            const newJobs = prev.filter((_, i) => i !== value)
-            localStorage.setItem("job", JSON.stringify(newJobs))
-            return newJobs
-        })
-    }
-
-    const handleEdit = (value) => {
-        setJob(jobs[value])
-        setEditIndex(value)
-    }
+    const editTask = (id, newText) => {
+        saveTasks(
+            tasks.map(t =>
+                t.id === id ? { ...t, text: newText } : t
+            )
+        );
+    };
 
     return (
         <div>
-            <form className="form-input" onSubmit={handleSubmit}>
-                <input
-                    value={job}
-                    onChange={e => setJob(e.target.value)}
+            <input
+                value={text}
+                onChange={e => setText(e.target.value)}
+                placeholder="Enter task"
+            />
+            <button onClick={addTask}>Add</button>
+
+            {tasks.map(task => (
+                <Task
+                    key={task.id}
+                    task={task}
+                    onSave={editTask}
+                    onDelete={deleteTask}
                 />
-                <Button type="submit" label="Add" />
-            </form>
-
-            <ul>
-                {jobs.map((job, value) => (
-                    <li key={value}>
-                        {job}
-                        <button onClick={() => handleEdit(value)}>Sửa</button>
-                        <button onClick={() => handleDelete(value)}>Xóa</button>
-                    </li>
-                ))}
-            </ul>
+            ))}
         </div>
-    )
-}
+    );
+};
 
-export default TodoList
+export default TodoList;

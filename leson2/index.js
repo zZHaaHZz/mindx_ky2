@@ -12,7 +12,8 @@ import {
     mergeObjectsSumValues,
     countElements,
     cleanObject,
-    hasDuplicate
+    hasDuplicate,
+    sumByGroup
 
  } from "./until.js"
 
@@ -74,5 +75,14 @@ import {
 // let obj = { a: 1, b: null, c: undefined, d: 4 } 
 // console.log(cleanObject(obj))
 
-let arr = [1,2,3,4,5,1]
-console.log(hasDuplicate(arr))
+// let arr = [1,2,3,4,5,1]
+// console.log(hasDuplicate(arr))
+
+let arr = [
+    { type: 'fruit', price: 10 },
+    { type: 'vegetable', price: 20 },
+    { type: 'fruit', price: 30 }
+];
+let key = 'type'    
+
+console.log(sumByGroup(arr, key))

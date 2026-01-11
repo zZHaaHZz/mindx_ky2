@@ -153,3 +153,19 @@ export function hasDuplicate(arr){
     }
     return true
 }
+
+export const sumByGroup =  (arr, key) => {
+    let res = {}    
+    for(let i = 0; i < arr.length; i++){
+        const groupKey = arr[i][key]
+        const price = arr[i]['price'] 
+        if(res[groupKey] === undefined){
+            res[groupKey] = price
+        }
+        else{
+            res[groupKey] += price
+        }
+    }
+    return res  
+
+}
